@@ -1,0 +1,131 @@
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.button {
+  min-width: 100px;
+  font-family: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid;
+  border-radius: 5px;
+  background: #EEE;
+  color: #333;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transition: background-color 0.5s ease-in-out, 0.7s;
+  transition: background-color 0.5s ease-in-out, 0.7s;
+}
+
+input[type="number"] {
+  padding: .5em .6em;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 3px 3px #ddd;
+          box-shadow: inset 0 3px 3px #ddd;
+  border-radius: 4px;
+}
+
+body {
+  line-height: 1.42857143;
+  color: #333;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.container #header {
+  text-align: center;
+  border-bottom: 3px solid black;
+  padding: 1em;
+}
+
+.container #main-content {
+  text-align: center;
+}
+
+.container #main-content .timer {
+  font-size: 6em;
+  margin: 0.3em;
+  font-weight: bold;
+}
+
+.container #main-content .buttons .btn-start {
+  background-color: #9F9;
+  color: #333;
+  border: 1px solid #171;
+}
+
+.container #main-content .buttons .btn-stop {
+  background-color: #F99;
+  color: #333;
+  border: 1px solid #711;
+}
+
+.container #main-content .buttons .btn-stop:focus {
+  outline: none;
+}
+
+.container #main-content .buttons .btn-reset {
+  background-color: #FF9;
+  color: #333;
+  border: 1px solid #771;
+}
+
+.container #main-content .break-buttons {
+  color: white;
+}
+
+.container #main-content .custom-time {
+  margin: 1em;
+}
+
+.container #main-content .custom-time .submit {
+  margin-top: 0.7em;
+}
+
+.container #main-content .break-buttons-shortcut {
+  border-top: 3px solid black;
+  margin: 1em auto;
+  width: 100%;
+  padding-top: 1em;
+}
+
+.container #main-content .custom-break-settings .form-container {
+  display: block;
+}
+
+.container #main-content .custom-break-settings .btn-set-break {
+  margin: 0.7em;
+}
+
+.container #fotter {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.container #fotter .credits {
+  margin: 2em 0;
+  color: #999;
+}
+
+.container #fotter .credits a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.container #fotter .credits a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+/*# sourceMappingURL=style.css.map */

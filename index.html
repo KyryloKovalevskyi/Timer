@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link rel="icon" href="./images/output-onlinepngtools.png" id="favicon">
+    <title>Pomodoro Timer</title>
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+                <h1>Timer</h1>
+                <p>A simple tool for skyrocketing your productivity</p>
+        </header>
+
+        <section id="main-content">
+
+                <div class="timer">00:00:00</div>
+
+                <div class="buttons">
+                    <button class="button btn-start ">start</button>
+                    <button class="button btn-stop">stop</button>
+                    <button class="button  btn-reset">reset</button>
+                </div>
+
+                <div class="custom-time">
+                    <form>
+                        <label for="hours">Hours</label>
+                        <input type="number" min="0" max="1000000"  name="hours" id="hours-input">
+                        <label for="minutes">Minutes</label>
+                        <input type="number" min="0" max="1000000"  name="minutes" id="minutes-input">
+                        <label for="seconds">Seconds</label>
+                        <input type="number" min="0" max="1000000"  name="seconds" id="seconds-input">
+                    </form>
+                    <div class="submit">
+                        <button class="button btn-set-timer">Set Timer</button>
+                    </div>
+
+                </div>
+
+                <div class="break-buttons-shortcut">
+                    <button class="button btn-short-break">5 minutes short break</button>
+                    <button class="button btn-long-break">15 minutes long break</button>
+                </div>
+
+                <div class="custom-break-settings">
+                    <label for="customBreakInput">Set break time</label>
+                    <div class="form-container">
+                            <input type="number" min="0" max="1000000" name="customBreakInput" id="break-input">
+                    </div>
+                    <button class="button btn-set-break">Custom Break-time:</button>
+                </div>
+
+
+
+
+        </section>
+
+
+
+
+        <footer id="fotter">
+            <div class="credits">
+                Created by
+                <a href="#">Kyrylo Kovalevskyi</a>
+                -
+                <a href="https://github.com/KyryloKovalevskyi" target="_blank">Github</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <audio src="./sounds/salamisound-7587855-double-beep-beep-as-e-g.mp3 " id="alarm-goes-off"></audio>
+    <script src="js/app1.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+//VARIABLES
+$main: #333;
+$secondary: #EEE;
+
+//MEDIA QUERIES
+@mixin media-sm {
+    @media (max-width: 440px) {
+        @content;
+    }
+}
+
+@mixin media-mb {
+    @media (max-width: 666px) {
+        @content;
+    }
+}
+@mixin media-lg {
+    @media (max-width: 1100px) {
+        @content;
+    }
+}
+
