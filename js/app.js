@@ -1,32 +1,5 @@
+"use strict";
 (function() {
-
-    const startButton = document.querySelector(".btn-start").addEventListener("click", ()=> {
-        startTimer();
-    })
-    const stopButton = document.querySelector(".btn-stop").addEventListener("click", ()=> {
-        stopTimer();
-    });
-    const resetButton = document.querySelector(".btn-reset").addEventListener("click", ()=> {
-        resetF();
-    })
-    const shortBreakButton = document.querySelector(".btn-short-break").addEventListener("click", ()=> {
-        shortBreak();
-    })
-    const longBreakButton = document.querySelector(".btn-long-break").addEventListener("click", ()=> {
-        longBreak();
-    })
-    const setTimerButton = document.querySelector(".btn-set-timer").addEventListener("click", ()=> {
-        setCustomTime();
-    })
-    const setBreakTimeButton = document.querySelector(".btn-set-break").addEventListener("click", ()=> {
-        setBreakTime();
-    })
-
-
-    // const logContainer = document.querySelector("#log");
-    // const logStart = document.querySelector(".start-log");
-    // const logStop = document.querySelector(".stop-log");
-
     let timer;
     let countDownDate;
     let customTimerLength;
@@ -39,10 +12,12 @@
     const minutesInput = document.querySelector("#minutes-input");
     const secondsInput = document.querySelector("#seconds-input");
     const hoursInput = document.querySelector("#hours-input");
+    const timerDisplay = document.querySelector(".timer")
+    const titleDisplay = document.querySelector("title");
 
 
-    let timerF = () => {
-
+    function timerF() {
+        //Core timer's functionality
         let now = Date.now();
         let distance = countDownDate - now;
 
@@ -50,72 +25,72 @@
         let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+
         hours = hours < 10 ? "0" + hours : hours;
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
+        //Display the timer
+        timerDisplay.innerHTML = hours + ":" + minutes + ":" + seconds;
+        //Display the timer in the title section
+        titleDisplay.innerHTML = hours + ":" + minutes + ":" + seconds;
 
-        timerDisplay = document.querySelector(".timer").innerHTML = hours + ":" + minutes + ":" + seconds;
-        document.title = timerDisplay.innerHTML = hours + ":" + minutes + ":" + seconds;
-
-        if(distance < 0) {
+        timer = setTimeout(timerF, 1000)
+        //When the time is out
+        if (distance <= 0) {
             clearInterval(timer);
-            document.querySelector(".timer").innerHTML =  "00:00:00";
+            document.querySelector(".timer").innerHTML = "00:00:00";
             document.title = timerDisplay.innerHTML = "00:00:00";
             isRunning = false;
             changeFavicon();
+            alarm();
             return;
         }
-
-        timer = setTimeout(timerF, 1000)
     }
 
-
-    const alarm1 = document.querySelector("#alarm-goes-off");
-        function alarm() {
+    //Play alarm sound when session ends
+    function alarm() {
+        const alarm1 = document.querySelector("#alarm-goes-off");
         alarm1.play();
     }
 
-    function changeFavicon(){
+    //Change favicon every time the timer is on
+    function changeFavicon() {
         let icon = document.querySelector("#favicon");
-        if(isRunning) {
+        if (isRunning) {
             icon.setAttribute("href", "images/favicon-32x32.png");
         } else {
             icon.setAttribute("href", "images/output-onlinepngtools.png")
         }
     }
 
-    let resetF = () => {
+    function resetF() {
         clearInterval(timer);
         pauseTime = NaN;
-        //startButton.innerHTML = "start";
-        const timerDisplay = document.querySelector(".timer").innerHTML = "00:00:00";
-        isRunning = false;
-        changeFavicon();
     }
 
-    function startTimer() {
-
-        if(isNaN(pauseTime)) {
-            //startButton.innerHTML = "start";
+    //Listeners for start, pause, stop etc...
+    const startButton = document.querySelector(".btn-start");
+    startButton.addEventListener("click", () => {
+        clearInterval(timer);
+        startButton.innerHTML = "starts";
+        if (isNaN(pauseTime)) {
             start = Date.now();
+            //Reads values from the input fields
             customTimerLength = hoursInput.value * 60 * 60 * 1000 + minutesInput.value * 60 * 1000 + secondsInput.value * 1000;
             countDownDate = start + customTimerLength;
             timerF();
             isRunning = true;
             changeFavicon();
-        }
-
-
-        else {
+        } else {
             start = Date.now();
             countDownDate = start + pauseLength;
             timerF();
             isRunning = true;
             changeFavicon();
         }
-    }
+    })
 
-    function setCustomTime() {
+    const setTimerButton = document.querySelector(".btn-set-timer").addEventListener("click", () => {
         resetF();
         start = Date.now();
         customTimerLength = hoursInput.value * 60 * 60 * 1000 + minutesInput.value * 60 * 1000 + secondsInput.value * 1000;
@@ -123,18 +98,26 @@
         timerF();
         isRunning = true;
         changeFavicon();
-    }
+    })
 
-    function stopTimer() {
+    const stopButton = document.querySelector(".btn-stop").addEventListener("click", () => {
         pauseTime = Date.now();
         pauseLength = countDownDate - pauseTime;
-        resetF();
+        clearInterval(timer);
         startButton.innerHTML = "Resume"
         isRunning = false;
         changeFavicon();
-    }
+    });
 
-    function shortBreak() {
+    const resetButton = document.querySelector(".btn-reset").addEventListener("click", () => {
+        resetF();
+        startButton.innerHTML = "start";
+        timerDisplay.innerHTML = "00:00:00";
+        isRunning = false;
+        changeFavicon();
+    })
+
+    const shortBreakButton = document.querySelector(".btn-short-break").addEventListener("click", () => {
         resetF();
         start = Date.now();
         customTimerLength = 5 * 60 * 1000;
@@ -142,9 +125,9 @@
         timerF();
         isRunning = true;
         changeFavicon();
-    }
+    })
 
-    function longBreak() {
+    const longBreakButton = document.querySelector(".btn-long-break").addEventListener("click", () => {
         resetF();
         start = Date.now();
         customTimerLength = 15 * 60 * 1000;
@@ -152,9 +135,9 @@
         timerF();
         isRunning = true;
         changeFavicon();
-    }
+    })
 
-    function setBreakTime() {
+    const setBreakTimeButton = document.querySelector(".btn-set-break").addEventListener("click", () => {
         resetF();
         start = Date.now();
         customTimerLength = customBreakInput.value * 60 * 1000;
@@ -162,43 +145,6 @@
         timerF();
         isRunning = true;
         changeFavicon();
-    }
-
-
-
-    // function logInfo()  {
-    //     customTimerLength = hoursInput.value * 60 * 60 * 1000 + minutesInput.value * 60 * 1000 + secondsInput.value * 1000;
-    //     console.log(customTimerLength);
-    // }
-
-    // logStart.addEventListener("click", ()=> {
-    //     logInfo();
-    // })
+    })
 
 })();
-
-
-
-
-
-var maximum69Number  = function(num) {
-    let sum = [];
-    for(let i = 0; i < num.length; i++) {
-
-            if(num[i] === "6") {
-                sum.push("9");
-
-            } else if (num[i] === "9") {
-                sum.push("6");
-            }
-    }
-         return sum;
-};
-
-maximum69Number("9669");
-
-const maximum69Numberr = num => {
-    console.log(Number(num.toString().replace('6', '9')))
-    ;}
-
-maximum69Numberr("9669")
